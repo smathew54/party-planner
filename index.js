@@ -1,3 +1,7 @@
+//GLOBAL VARIABLES
+const $fancyDiv = document.createElement("div")
+const $app = document.querySelector("#app");
+
 
 const displayMoreInfo = (moreInfo) => {
     const $partyDetails = document.createElement("div");
@@ -12,7 +16,6 @@ const displayMoreInfo = (moreInfo) => {
 
     else {
 
-    $partyDetails.innerHTML = "";
 
     const $id = document.createElement("p")
     const $name = document.createElement("p")
@@ -30,8 +33,8 @@ const displayMoreInfo = (moreInfo) => {
     $partyDetails.append($description)
 
     //then add to the main app
-    const $app = document.querySelector("#app");
-    $app.append($partyDetails)
+    $fancyDiv.innerHTML = ""
+    $fancyDiv.append($partyDetails)
     }
 
 }
@@ -100,6 +103,7 @@ const fetchData = async () => {
 const main = () => {
   console.log("here we go");
   fetchData();
+  $app.append($fancyDiv)
 };
 
 main();
