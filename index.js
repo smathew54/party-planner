@@ -1,10 +1,51 @@
+
+const displayMoreInfo = (moreInfo) => {
+    const $partyDetails = document.createElement("div");
+    $partyDetails.id = "details";
+
+    if (!moreInfo) {
+        const $initialScreen = document.createElement("p");
+        $partyDetails.append($initialScreen)
+        $app.append($partyDetails)
+        return 
+    }
+
+    else {
+
+    $partyDetails.innerHTML = "";
+
+    const $id = document.createElement("p")
+    const $name = document.createElement("p")
+    const $description = document.createElement("p")
+    const $date = document.createElement("p")
+
+
+    $id.textContent = moreInfo.id
+    $name.textContent = moreInfo.name
+    $description.textContent = moreInfo.description
+    $date.textContent = moreInfo.date
+
+    $partyDetails.append($id)
+    $partyDetails.append($name)
+    $partyDetails.append($description)
+
+    //then add to the main app
+    const $app = document.querySelector("#app");
+    $app.append($partyDetails)
+    }
+
+}
+
+
 const getMoreInfo = async (id) => {
-  try {
-    const response = await fetch(
-      `https://fsa-crud-2aa9294fe819.herokuapp.com/api/2505-ftb-ct-web-pt/events/${id}`
-    );
-    const data = await response.json();
-    console.log(data);
+    console.log(id)
+    try {
+        const response = await fetch(
+            `https://fsa-crud-2aa9294fe819.herokuapp.com/api/2505-ftb-ct-web-pt/events/${id}`
+        );
+        const data = await response.json();
+        console.log(data);
+        displayMoreInfo(data.data)
   } catch (error) {
     console.error(error);
   }
@@ -28,6 +69,8 @@ const displayComponents = (coreData) => {
     $h3 = document.createElement("h3");
     $button = document.createElement("button");
     $button.textContent = element.name;
+    console.log(element.id)
+    $button.addEventListener("click", () => getMoreInfo(element.id));
     $h3.textContent = element.name;
     //$div.append($h3);
     $div.append($button);
